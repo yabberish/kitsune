@@ -1,7 +1,7 @@
 import sys, traceback
 import discord
 from discord.ext import commands
-import json
+
 
 
 
@@ -9,22 +9,22 @@ import json
 def get_prefix(bot, message):
 
 
-    prefixes = ['>?', 'lol ', 'k!']
+    prefixes = ['k!']
 
 
     if not message.guild:
-        return '?'
 
+        return '?'
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
 
 
-utilities_extensions = ['cogs.utilities.help', 'cogs.utilities.serverinfo', 'cogs.utilities.userinfo', 'cogs.utilities.ping']
-moderation_extensions = []
+utilities_extensions = ['cogs.fun.eightball', 'cogs.help', 'cogs.utilities.serverinfo', 'cogs.utilites.userinfo', 'cogs.utilites.ping']
+moderation_extensions = ['cogs.fun.eightball', 'cogs.help', 'cogs.utilities.serverinfo', 'cogs.utilities.userinfo', 'cogs.utilities.ping']
 reddit_extensions = []
 fun_extensions = ['cogs.fun.eightball']
-bot = commands.Bot(command_prefix=get_prefix, description='kitsune! Rewrite')
+bot = commands.Bot(command_prefix=get_prefix, description='kitsune! Cogs')
 
 bot.remove_command("help")
 
