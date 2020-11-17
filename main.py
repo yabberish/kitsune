@@ -1,16 +1,13 @@
 import sys, traceback
 import discord
 from discord.ext import commands
-
-
-
+import os
+import sqlite3
 
 
 def get_prefix(bot, message):
 
-
     prefixes = ['k!']
-
 
     if not message.guild:
 
@@ -20,10 +17,13 @@ def get_prefix(bot, message):
 
 
 
-utilities_extensions = ['cogs.fun.eightball', 'cogs.help', 'cogs.utilities.serverinfo', 'cogs.utilites.userinfo', 'cogs.utilites.ping']
-moderation_extensions = ['cogs.fun.eightball', 'cogs.help', 'cogs.utilities.serverinfo', 'cogs.utilities.userinfo', 'cogs.utilities.ping']
+utilities_extensions = [
+    'cogs.utilities.help', 'cogs.utilities.serverinfo',
+    'cogs.utilities.userinfo', 'cogs.utilities.ping'
+]
+moderation_extensions = []
 reddit_extensions = []
-fun_extensions = ['cogs.fun.eightball']
+fun_extensions = ['cogs.fun.eightball', 'cogs.fun.ttt', ]
 bot = commands.Bot(command_prefix=get_prefix, description='kitsune! Cogs')
 
 bot.remove_command("help")
@@ -38,11 +38,16 @@ if __name__ == '__main__':
     for extension in fun_extensions:
         bot.load_extension(extension)
 
+
+
 @bot.event
 async def on_ready():
-    print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
+    print(
+        f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n'
+    )
 
 
-
-bot.run('Nzc2NTQ2ODc4ODYzMDQ4NzY1.X62dow.OhoYKyrRT3xuDTtm2GN-wD4w3yY', bot=True, reconnect=True)
-
+bot.run(
+    'Nzc2NTQ2ODc4ODYzMDQ4NzY1.X62dow.OhoYKyrRT3xuDTtm2GN-wD4w3yY',
+    bot=True,
+    reconnect=True)

@@ -11,6 +11,8 @@ discord = "^1.0.1"
 utils = "^1.0.1"
 asyncpg = "^0.21.0"
 ping3 = "^2.6.6"
+dataio = "^0.0.5"
+dblpy = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 
