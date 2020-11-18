@@ -18,8 +18,8 @@ def get_prefix(bot, message):
 
 
 utilities_extensions = [
-    'cogs.utilities.help', 'cogs.utilities.serverinfo',
-    'cogs.utilities.userinfo', 'cogs.utilities.ping'
+    'cogs.utilities.serverinfo',
+    'cogs.utilities.userinfo', 'cogs.utilities.ping', 'cogs.utilities.help', 'cogs.utilities.setprefix'
 ]
 moderation_extensions = []
 reddit_extensions = []
@@ -37,6 +37,8 @@ if __name__ == '__main__':
         bot.load_extension(extension)
     for extension in fun_extensions:
         bot.load_extension(extension)
+
+
 
 
 
