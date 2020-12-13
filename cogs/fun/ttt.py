@@ -4,7 +4,14 @@ import random
 import discord
 from discord.ext import commands
 import yaml
+def get_prefix(client, message):
+    with open('./json/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
 
+    return prefixes[str(message.guild.id)]
+
+
+bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
 
 with open('config.yaml') as config_file:
     config = yaml.load(config_file, Loader=yaml.FullLoader)
@@ -30,7 +37,7 @@ class TicTacToe:
     @staticmethod
     def get_ttt_embed(player1, player2, data, move_of, final=False, tie=False):
         embed = discord.Embed(title=f"Match of {player1} vs {player2}")
-        embed.colour = move_of.colour if not final else player1.colour if move_of == player2 else player2.colour
+        embed.colour=0xffa500
         data_ = data.copy()
         for i in range(1, 10):
             if data[i] == 0:
@@ -50,9 +57,9 @@ class TicTacToe:
             description += ' **(X)**' if move_of == player1 else ' **(O)**'
         else:
             if move_of == player1:
-                description += f'\n\n{player2.name}#{player2.discriminator} is Winner.'
+                description += f'\n\n{player2.name}#{player2.discriminator} is the winner!.'
             else:
-                description += f'\n\n{player1.name}#{player1.discriminator} is Winner.'
+                description += f'\n\n{player1.name}#{player1.discriminator} is the winner!.'
 
         embed.description = description
         return embed
@@ -185,7 +192,7 @@ class TicTacToeBot(commands.Cog):
 
                 # Wait for Reaction
                 try:
-                    reaction = await self.bot.wait_for('reaction_add', check=check, timeout=30)
+                    reaction = await self.bot.wait_for('reaction_add', check=check, timeout=120)
                 except asyncio.TimeoutError:
                     await ctx.send('Timed Out..{} failed to use moves.'.format(move_of.mention))
                     return
@@ -226,9 +233,9 @@ class TicTacToeBot(commands.Cog):
                         player1, player2, data, move_of, final=True)
                     await initial_embed.edit(embed=new_embed)
                     if winner == 1:
-                        await ctx.send(f'{player1.mention} is Winner.')
+                        await ctx.send(f'{player1.mention} is the winner!')
                     else:
-                        await ctx.send(f'{player2.mention} is Winner.')
+                        await ctx.send(f'{player2.mention} is the winner!')
                     await initial_embed.clear_reactions()
                     return
         except discord.NotFound:

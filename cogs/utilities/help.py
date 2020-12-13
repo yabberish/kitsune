@@ -2,6 +2,16 @@ import discord
 from discord.ext import commands
 import random
 
+def get_prefix(client, message):
+    with open('./json/prefixes.json', 'r') as f:
+        prefixes = json.load(f)
+
+    return prefixes[str(message.guild.id)]
+
+
+bot = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
+
+
 class helpCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -18,15 +28,17 @@ class helpCog(commands.Cog):
      embed.set_footer(icon_url = ctx.author.avatar_url, text = f"Command executed by {ctx.author.name}")
    
 
-     embed.add_field(name="Moderation", value="kick, ban, mute, unmute, warn, warns", inline=False)
+     embed.add_field(name="Moderation", value="`kick`, `ban`, `mute`, `unmute`, `warn`, `warns`, `slowmode`", inline=False)
 
-     embed.add_field(name="Reddit", value="meme, memes, minecraft, fortnite", inline=False)
+     embed.add_field(name="Reddit", value="`meme`, `gaming`, `aww`", inline=False)
 
 
 
-     embed.add_field(name="Utility", value="whois, ping, serverinfo, help", inline=False)
+     embed.add_field(name="Utility", value="`whois`, `embed`, `serverinfo`, `help`", inline=False)
  
-     embed.add_field(name="Fun", value="tictactoe, hangman, numgame, trivia, 8ball", inline=False)
+     embed.add_field(name="Fun", value="`tictactoe`, `8ball`", inline=False)
+     
+     embed.add_field(name="Economoy", value="`balance`, `rob`, `beg`, `deposit`, `withdraw`", inline=False)
     
     
      await ctx.send(embed=embed)
@@ -34,7 +46,5 @@ class helpCog(commands.Cog):
     
 
 
-# The setup fucntion below is neccesarry. Remember we give bot.add_cog() the name of the class in this case MembersCog.
-# When we load the cog, we use the name of the file.
 def setup(bot):
     bot.add_cog(helpCog(bot))

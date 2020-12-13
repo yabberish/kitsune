@@ -19,7 +19,7 @@ class serverinfoCog(commands.Cog):
      embed = discord.Embed(
         title="Server info",
         description=f'Information about the guild: **{guild.name}**',
-        color=0x00000
+        color=0xffa500
      )
      embed.set_thumbnail(url=f'{icon}')
      embed.set_footer(text=f'Command executed by {ctx.author.name}', icon_url = ctx.author.avatar_url)
