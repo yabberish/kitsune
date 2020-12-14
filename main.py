@@ -70,7 +70,7 @@ async def bal(ctx):
     wallet_amt = users[str(user.id)]["wallet"]
 
     bank_amt = users[str(user.id)]["bank"]
-    total_amt = users[str(user.id)]["wallet"],users[str(user.id)]["bank"]
+    total_amt = users[str(user.id)]["wallet"] + users[str(user.id)]["bank"]
     
 
     embed = discord.Embed(title=f"{ctx.author.name}'s Balance",description=f"**Wallet:** {wallet_amt}\n**Bank:** {bank_amt}\n**Total:** {total_amt}", color=0xffa500)
