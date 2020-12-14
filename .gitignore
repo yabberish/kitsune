@@ -1,0 +1,7 @@
+__pycache__
+*.replit
+*.yaml
+*.lock
+*.toml
+*.json
+**/database/*.db
