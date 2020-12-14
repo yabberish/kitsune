@@ -55,6 +55,7 @@ class Cog(commands.Cog):
 
     @commands.group()
     @commands.guild_only()
+    @commands.has_permissions(manage_messages=True)
     async def warn(self, ctx, member : discord.Member, *, reason="None given."):
         invoker = ctx.author
         if member.id != ctx.author.id:
@@ -82,10 +83,9 @@ class Cog(commands.Cog):
             embed.set_author(name="You can't warn yourself!")
             await ctx.send(embed=embed)
 
-
     @commands.group(aliases=['warns', 'infracts'])
     @commands.guild_only()
-    # add permision check
+    @commands.has_permissions(manage_messages=True)
     async def infractions(self, ctx, member : discord.Member):
         c.execute("SELECT reason FROM warns WHERE ? LIKE user_id AND ? LIKE guild_id", (member.id, member.guild.id,))
         infracts = tuple(c.fetchall())
