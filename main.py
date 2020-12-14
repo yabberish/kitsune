@@ -22,7 +22,7 @@ with open('secrets.json', 'r') as tf:
 utilities_extensions = [
     'cogs.utilities.serverinfo',
     'cogs.utilities.userinfo', 'cogs.utilities.help', 'cogs.utilities.embeds',
-    'cogs.utilities.mistake', 'cogs.error.errorHandler'
+    'cogs.utilities.mistake', 'cogs.error.errorHandler', 'cogs.utilities.credits'
 ]
 moderation_extensions = ['cogs.mod.kick', 'cogs.mod.ban', 'cogs.mod.tempmute','cogs.mod.mute','cogs.mod.unmute','cogs.mod.slowmode', 'cogs.mod.warn']
 reddit_extensions = ['cogs.reddit.meme', 'cogs.reddit.aww', 'cogs.reddit.gaming']
@@ -51,12 +51,6 @@ async def on_ready():
     print(
         f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n'
     )
-
-
-
-# @bot.event
-# async def on_command_error(ctx, error):
-#   await ctx.send(f"<:kitsunethink:786984788095533069> {error}")
 
 @bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
@@ -93,22 +87,8 @@ async def beg(ctx):
 
     with open("mainbank.json", "w") as f:
         json.dump(users,f)
-@bot.command()
-async def credits(ctx):
-    embed=discord.Embed(
-        title='Credits',
-        color=0xffa500, 
-                        # description="<@738604939957239930> | **Owner of the bot, developed like 85% of it.**\n <@701494621162963044> | **Helped with the creation of the warning system.**\n <@474016258019557377> | **Worked on the kitsune! dashboard.** (in progress)\n <@629749573384142848> | **Made the profile picture for kitsune**"
-    )
-    embed.add_field(name='Elflanded#0004', value='Owner of the bot, developed like 85% of it.', inline=False)
 
-    embed.add_field(name='Funnylimericks#6967', value='Helped with the creation of the warning system.', inline=False)
-    
-    embed.add_field(name='iWillBanU#2247', value='Worked on the kitsune! dashboard. (in progress)', inline=False)
 
-    embed.add_field(name='Shadow Is Gone#7949', value='Made the profile picture for kitsune', inline=False)
-    
-    await ctx.send(embed=embed)
 @bot.command(aliases=["with",'w'])
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def withdraw(ctx,amount = None):
@@ -209,7 +189,4 @@ async def update_bank(user, change=0,mode = 'wallet'):
     bal = users[str(user.id)]["wallet"],users[str(user.id)]["bank"]
     return bal
 
-bot.run(
-    TOKEN,
-    bot=True,
-    reconnect=True)
+bot.run(TOKEN)
