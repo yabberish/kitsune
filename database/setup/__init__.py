@@ -11,5 +11,6 @@ def runscript(path):
     with open(path, "r") as script:
         c.executescript(script.read())
         conn.commit()
+        conn.close()
 
 runscript(BUILD_PATH)

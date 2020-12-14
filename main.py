@@ -7,11 +7,11 @@ ____  __.__  __
         \/             \/           \/     \/ 
 """
 
-import sys, traceback
+import sys
+import traceback
 import discord
 from discord.ext import commands
 import os
-import sqlite3
 import json
 import math
 import random
@@ -26,7 +26,7 @@ utilities_extensions = [
 ]
 moderation_extensions = ['cogs.mod.kick', 'cogs.mod.ban', 'cogs.mod.tempmute','cogs.mod.mute','cogs.mod.unmute','cogs.mod.slowmode', 'cogs.mod.warn']
 reddit_extensions = ['cogs.reddit.meme', 'cogs.reddit.aww', 'cogs.reddit.gaming']
-fun_extensions = ['cogs.fun.eightball', 'cogs.fun.ttt']
+fun_extensions = ['cogs.fun.eightball', 'cogs.fun.ttt', 'cogs.economy.economy', 'cogs.utilities.mistake']
 
 bot = commands.Bot(command_prefix='k!')
 
@@ -54,9 +54,9 @@ async def on_ready():
 
 
 
-@bot.event
-async def on_command_error(ctx, error):
-  await ctx.send(f"<:kitsunethink:786984788095533069> {error}")
+# @bot.event
+# async def on_command_error(ctx, error):
+#   await ctx.send(f"<:kitsunethink:786984788095533069> {error}")
 
 @bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
@@ -95,7 +95,20 @@ async def beg(ctx):
         json.dump(users,f)
 @bot.command()
 async def credits(ctx):
-  await ctx.send("<@738604939957239930> | **Owner of the bot, developed like 85% of it.**\n <@701494621162963044> | **Helped with the creation of the warning system.**\n <@474016258019557377> | **Worked on the kitsune! dashboard.** (in progress)")
+    embed=discord.Embed(
+        title='Credits',
+        color=0xffa500, 
+                        # description="<@738604939957239930> | **Owner of the bot, developed like 85% of it.**\n <@701494621162963044> | **Helped with the creation of the warning system.**\n <@474016258019557377> | **Worked on the kitsune! dashboard.** (in progress)\n <@629749573384142848> | **Made the profile picture for kitsune**"
+    )
+    embed.add_field(name='Elflanded#0004', value='Owner of the bot, developed like 85% of it.', inline=False)
+
+    embed.add_field(name='Funnylimericks#6967', value='Helped with the creation of the warning system.', inline=False)
+    
+    embed.add_field(name='iWillBanU#2247', value='Worked on the kitsune! dashboard. (in progress)', inline=False)
+
+    embed.add_field(name='Shadow Is Gone#7949', value='Made the profile picture for kitsune', inline=False)
+    
+    await ctx.send(embed=embed)
 @bot.command(aliases=["with",'w'])
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def withdraw(ctx,amount = None):

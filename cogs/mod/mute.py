@@ -1,6 +1,7 @@
 from discord.ext import commands
 import discord
 import asyncio
+import json
 def get_prefix(client, message):
     with open('./json/prefixes.json', 'r') as f:
         prefixes = json.load(f)
@@ -19,7 +20,7 @@ class muteCog(commands.Cog):
     async def mute(self, ctx, member: discord.Member, reason=None):
       role = discord.utils.get(ctx.guild.roles, name="Muted")
       await member.add_roles(role)
-      ctx.send(f'**Muted** {member.mention}\n**Reason: **{reason}')
+      await ctx.send(f'**Muted** {member.mention}\n**Reason: **{reason}')
 
       embed = discord.Embed(color=discord.Color.green())
       embed.add_field(name=f"You've been **Muted** in {ctx.guild.name}.", value=f"**Action By: **{ctx.author.mention}\n**Reason: **{reason}\n**Duration: ∞**")
