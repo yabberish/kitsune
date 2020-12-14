@@ -7,14 +7,13 @@ ____  __.__  __
         \/             \/           \/     \/ 
 """
 
-import sys
+from discord.ext import commands
 import traceback
 import discord
-from discord.ext import commands
-import os
-import json
-import math
 import random
+import json
+import sys
+import os
 
 with open('secrets.json', 'r') as tf:
     tf = json.load(tf)
@@ -26,7 +25,7 @@ utilities_extensions = [
 ]
 moderation_extensions = ['cogs.mod.kick', 'cogs.mod.ban', 'cogs.mod.tempmute','cogs.mod.mute','cogs.mod.unmute','cogs.mod.slowmode', 'cogs.mod.warn']
 reddit_extensions = ['cogs.reddit.meme', 'cogs.reddit.aww', 'cogs.reddit.gaming']
-fun_extensions = ['cogs.fun.eightball', 'cogs.fun.ttt', 'cogs.economy.economy', 'cogs.utilities.mistake']
+fun_extensions = ['cogs.fun.eightball', 'cogs.fun.ttt', 'cogs.utilities.mistake']
 
 bot = commands.Bot(command_prefix='k!')
 
