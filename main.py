@@ -25,7 +25,7 @@ utilities_extensions = [
     'cogs.error.errorHandler', 'cogs.utilities.credits',
     'cogs.utilities.owner'
 ]
-moderation_extensions = ['cogs.mod.kick', 'cogs.mod.ban', 'cogs.mod.tempmute','cogs.mod.mute','cogs.mod.unmute','cogs.mod.slowmode', 'cogs.mod.warn']
+moderation_extensions = ['cogs.mod.kick', 'cogs.mod.ban', 'cogs.mod.tempmute','cogs.mod.mute','cogs.mod.unmute','cogs.mod.slowmode', 'cogs.mod.warn', 'cogs.mod.purge']
 reddit_extensions = ['cogs.reddit.meme', 'cogs.reddit.aww', 'cogs.reddit.gaming']
 fun_extensions = ['cogs.fun.eightball']
 
