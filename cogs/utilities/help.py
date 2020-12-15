@@ -23,7 +23,7 @@ class helpCog(commands.Cog):
 
 
 
-     embed.add_field(name="Utility", value="`whois`, `embed`, `serverinfo`, `help`", inline=False)
+     embed.add_field(name="Utility", value="`whois`, `embed`, `serverinfo`, `help`, `credits`", inline=False)
  
      embed.add_field(name="Fun", value="`8ball`", inline=False)
      

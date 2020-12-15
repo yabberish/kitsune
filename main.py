@@ -22,13 +22,14 @@ with open('secrets.json', 'r') as tf:
 utilities_extensions = [
     'cogs.utilities.serverinfo',
     'cogs.utilities.userinfo', 'cogs.utilities.help', 'cogs.utilities.embeds',
-    'cogs.utilities.mistake', 'cogs.error.errorHandler', 'cogs.utilities.credits'
+    'cogs.error.errorHandler', 'cogs.utilities.credits',
+    'cogs.utilities.owner'
 ]
 moderation_extensions = ['cogs.mod.kick', 'cogs.mod.ban', 'cogs.mod.tempmute','cogs.mod.mute','cogs.mod.unmute','cogs.mod.slowmode', 'cogs.mod.warn']
 reddit_extensions = ['cogs.reddit.meme', 'cogs.reddit.aww', 'cogs.reddit.gaming']
 fun_extensions = ['cogs.fun.eightball']
 
-bot = commands.Bot(command_prefix='k!')
+bot = commands.Bot(command_prefix='-')
 
 bot.remove_command("help")
 
