@@ -22,10 +22,10 @@ class ErrorHandler(commands.Cog):
                 return
 
         ignored = (commands.CommandNotFound, )
-        
+
         if isinstance(error, discord.HTTPException):
             pass
-        
+
         elif isinstance(error, ignored):
             return
 

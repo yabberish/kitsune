@@ -19,10 +19,6 @@ class muteCog(commands.Cog):
       await member.send(embed=embed)
 
 
- 
-
-
 def setup(bot):
     bot.add_cog(muteCog(bot))
     # Adds the Basic commands to the bot
-

@@ -25,5 +25,3 @@ class tmuteCog(commands.Cog):
 
 def setup(bot):
     bot.add_cog(tmuteCog(bot))
-    # Adds the Basic commands to the bot
-

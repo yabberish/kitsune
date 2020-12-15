@@ -18,9 +18,5 @@ class unmuteCog(commands.Cog):
 
       await member.remove_roles(role)
 
-
-
 def setup(bot):
     bot.add_cog(unmuteCog(bot))
-    # Adds the Basic commands to the bot
-
