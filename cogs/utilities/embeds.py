@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import discord
 import typing
 import re
 from discord.ext import commands
-
 
 
 class AnnoucementCog(commands.Cog):

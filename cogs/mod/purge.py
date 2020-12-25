@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import discord
 from discord.ext import commands
 
@@ -10,10 +12,7 @@ class purge(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def purge(self, ctx):
         pass
-        
-    async def is_user(self, m):
-        return m.author == user
-    
+
     @purge.command(name='channel')
     @commands.bot_has_permissions(manage_messages=True)
     @commands.has_permissions(manage_messages=True)

@@ -1,12 +1,12 @@
-import discord
+# -*- coding: utf-8 -*-
+
 from discord.ext import commands
 import random
+
 
 class eightballCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
- 
 
     @commands.command(name='8ball', aliases=['eightball'])
     @commands.guild_only()
