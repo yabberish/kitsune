@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import discord
 from discord.ext import commands
 
@@ -10,8 +12,7 @@ class Cog(commands.Cog):
     async def credits(self, ctx):
         embed=discord.Embed(
             title='Credits',
-            color=0xffa500, 
-                            # description="<@738604939957239930> | **Owner of the bot, developed like 85% of it.**\n <@701494621162963044> | **Helped with the creation of the warning system.**\n <@474016258019557377> | **Worked on the kitsune! dashboard.** (in progress)\n <@629749573384142848> | **Made the profile picture for kitsune**"
+            color=0xffa500,
         )
         embed.add_field(name='Elflanded#0004', value='Owner and main developer of kitsune!.', inline=False)
 
