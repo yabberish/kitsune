@@ -10,7 +10,7 @@ class helpCog(commands.Cog):
 
  
 
-    @commands.command(name='helEp', aliases=['HelpE'])
+    @commands.command(name='help', aliases=['Help'])
     @commands.guild_only()
     async def helpE(self, ctx):
         embed = discord.Embed(title="Help", description="Prefix: **k!**", color=0xffa500)
