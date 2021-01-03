@@ -3,6 +3,7 @@
 import time
 import asyncpg
 import json
+import jishaku
 
 from discord.ext import commands
 from datetime import datetime
@@ -40,6 +41,7 @@ class BotCore(commands.Bot):
                 self.load_extension(extension)
             for extension in fun_extensions:
                 self.load_extension(extension)
+            self.load_extension('jishaku')
 
     def start_bot(self):
         try:
@@ -54,6 +56,7 @@ class BotCore(commands.Bot):
             print(e)
         else:
             self.uptime = datetime.now()
+            self.remove_command('help')
             self.load_cogs()
             self.run(self.token)
 
@@ -72,7 +75,7 @@ with open('secrets.json', 'r') as tf:
 
 bot_creds = {
     "token": token,
-    'command_prefix': '~',
+    'command_prefix': 'k!',
     'db_user': pg_user,
     'db_pass': pg_pass,
     'db_name': pg_name}
