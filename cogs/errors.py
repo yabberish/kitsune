@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
-
 import discord
 import traceback
 import sys
 from discord.ext import commands
 
 
-class ErrorHandler(commands.Cog):
+class ErrorHandler(commands.Cog, command_attrs=dict(hidden=True)):
 
     def __init__(self, bot):
         self.bot = bot
@@ -33,6 +31,7 @@ class ErrorHandler(commands.Cog):
         else:
             print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
             traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
+
 
 def setup(bot):
     bot.add_cog(ErrorHandler(bot))
