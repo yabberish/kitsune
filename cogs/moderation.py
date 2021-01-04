@@ -12,25 +12,29 @@ class Moderation(commands.Cog):
         self.bot = bot
 
     # ban commands
-    @commands.command()
+    @commands.command(name='ban', help='Use this command to ban a member, they will get a dm with the reason they have been banned.',
+                      brief='Ban someone.')
     @commands.has_permissions(ban_members=True)
     @commands.cooldown(1, 7, commands.BucketType.user)
-    async def ban(self, ctx, member: discord.Member):
+    async def ban(self, ctx, member: discord.Member, reason='None given.'):
+        await member.send(f'You have been banned from {ctx.guild.name}, reason: {reason}')
         await member.ban()
         await ctx.message.add_reaction("✅")
-        await ctx.send(f"**{member.name}** has been banned by **{ctx.author.name}**!")
+        await ctx.send(f"**{member.name}** has been banned by **{ctx.author.name}** for **{reason}**!")
 
     # kick
-    @commands.command()
+    @commands.command(name='kick', help='Use this command to kick a member, they will get a dm with the reason they have been banned.',
+                      brief='Kick someone.')
     @commands.has_permissions(kick_members=True)
     @commands.cooldown(1, 7, commands.BucketType.user)
-    async def kick(self, ctx, member: discord.Member):
+    async def kick(self, ctx, member: discord.Member, reason='None given.'):
+        await member.send(f'You have been banned from {ctx.guild.name}, reason: {reason}')
         await member.kick()
         await ctx.message.add_reaction("✅")
-        await ctx.send(f"{member.name} has been kicked by {ctx.author.name}!")
+        await ctx.send(f"{member.name} has been kicked by **{ctx.author.name}** for **{reason}**!")
 
     # mute command
-    @commands.command()
+    @commands.command(name='mute')
     @commands.has_permissions(manage_messages=True)
     async def mute(self, ctx, member: discord.Member, reason=None):
         role = discord.utils.get(ctx.guild.roles, name="Muted")
@@ -102,7 +106,7 @@ class Moderation(commands.Cog):
         await member.remove_roles(role)
 
     # warn commands.
-    @commands.group()
+    @commands.command()
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     async def warn(self, ctx, member: discord.Member, *, reason="None given."):
@@ -133,7 +137,7 @@ class Moderation(commands.Cog):
             embed.set_author(name="You can't warn yourself!")
             await ctx.send(embed=embed)
 
-    @commands.group(aliases=['warns', 'infracts'])
+    @commands.command(aliases=['warns', 'infracts'])
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     async def infractions(self, ctx, member: discord.Member):
