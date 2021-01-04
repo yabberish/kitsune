@@ -12,7 +12,7 @@ class helpCog(commands.Cog):
 
     @commands.command(name='help', aliases=['Help'])
     @commands.guild_only()
-    async def helpE(self, ctx):
+    async def _help(self, ctx):
         embed = discord.Embed(title="Help", description="Prefix: **k!**", color=0xffa500)
     
         embed.set_thumbnail(url="https://images.discordapp.net/avatars/768967985326456874/0c0c081f777c871826e48d7e63c64c3a.png?size=512")
@@ -33,6 +33,10 @@ class helpCog(commands.Cog):
         embed.add_field(name="Economoy", value="`balance`, `rob`, `beg`, `deposit`, `withdraw`", inline=False)
         
         await ctx.send(embed=embed)
+
+    @commands.command(name='invite')
+    async def _invite(self, ctx):
+        await ctx.send('Invite me to your server here!\nhttps://discord.com/api/oauth2/authorize?client_id=768967985326456874&permissions=470281318&scope=bot')
 
 
 def setup(bot):
