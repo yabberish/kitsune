@@ -7,13 +7,24 @@ import os
 
 from discord.ext import commands
 from datetime import datetime
-from cogs.helpful import KitsuneHelpMenu
+
+
+# imports utils
+utilities_extensions = [
+    'cogs.utilities.serverinfo',
+    'cogs.utilities.userinfo', 'cogs.utilities.help', 'cogs.utilities.embeds',
+    'cogs.error.errorHandler', 'cogs.utilities.credits',
+    'cogs.utilities.owner', 'cogs.utilities.ping'
+]
+moderation_extensions = ['cogs.mod.kick', 'cogs.mod.ban', 'cogs.mod.tempmute', 'cogs.mod.mute', 'cogs.mod.unmute',
+                         'cogs.mod.slowmode', 'cogs.mod.warn', 'cogs.mod.purge']
+reddit_extensions = ['cogs.reddit.meme', 'cogs.reddit.aww', 'cogs.reddit.gaming']
+fun_extensions = ['cogs.fun.eightball']
 
 
 class BotCore(commands.Bot):
     def __init__(self, **kwargs):
         self.token = kwargs.pop('token')
-        self.ignored_cogs = kwargs.pop('ignored_cogs')
         self.uptime = None
         self.db = None
         self.db_user = kwargs.pop('db_user')
@@ -29,9 +40,15 @@ class BotCore(commands.Bot):
 
     def load_cogs(self):
         if __name__ == '__main__':
-            for cog in os.listdir('cogs'):
-                if cog.endswith('.py') and cog not in self.ignored_cogs:
-                    self.load_extension(f'cogs.{cog[:-3]}')
+            # self.remove_command("help")
+            for extension in utilities_extensions:
+                self.load_extension(extension)
+            for extension in moderation_extensions:
+                self.load_extension(extension)
+            for extension in reddit_extensions:
+                self.load_extension(extension)
+            for extension in fun_extensions:
+                self.load_extension(extension)
             self.load_extension('jishaku')
 
     def start_bot(self):
@@ -47,7 +64,7 @@ class BotCore(commands.Bot):
             print(e)
         else:
             self.uptime = datetime.now()
-            self.help_command = KitsuneHelpMenu()
+            self.remove_command('help')
             os.environ["JISHAKU_NO_UNDERSCORE"] = "True"
             os.environ["JISHAKU_NO_DM_TRACEBACK"] = "True"
             os.environ["JISHAKU_HIDE"] = "True"
@@ -68,13 +85,12 @@ with open('secrets.json', 'r') as tf:
     pg_name = tf['db_name']
 
 bot_creds = {
-    'token': token,
+    "token": token,
     'command_prefix': 'k!',
     'db_user': pg_user,
     'db_pass': pg_pass,
     'db_name': pg_name,
-    'owner_ids': [701494621162963044, 738604939957239930],
-    'ignored_cogs': []}
+    'owner_ids': [701494621162963044, 738604939957239930]}
 
 bot = BotCore(**bot_creds)
 

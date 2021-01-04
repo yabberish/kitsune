@@ -1,36 +1,27 @@
+# -*- coding: utf-8 -*-
+
 import discord
-from discord.ext import commands
 import typing
 import re
+from discord.ext import commands
 
 
-class Utilities(commands.Cog):
+class AnnoucementCog(commands.Cog):
+    """
+    Easily create plain text or embedded announcements
+    """
+
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def credits(self, ctx):
-        embed = discord.Embed(
-            title='Credits',
-            color=0xffa500,
-        )
-        embed.add_field(name='Elflanded#0004', value='Owner and main developer of kitsune!.', inline=False)
 
-        embed.add_field(name='Funnylimericks#6967', value='Helped with the creation of the warning system.',
-                        inline=False)
-
-        embed.add_field(name='iWillBanU#2247', value='Worked on the kitsune! dashboard. (in progress)', inline=False)
-
-        embed.add_field(name='Shadow Is Gone#7949', value='Kitsune! avatar artist', inline=False)
-
-        await ctx.send(embed=embed)
 
     @commands.command()
     @commands.has_permissions(manage_channels=True)
     async def embed(
-            self,
-            ctx: commands.Context,
-            role: typing.Optional[typing.Union[discord.Role, str]] = None,
+        self,
+        ctx: commands.Context,
+        role: typing.Optional[typing.Union[discord.Role, str]] = None,
     ):
 
         # TODO: Enable use of reactions
@@ -42,23 +33,23 @@ class Utilities(commands.Cog):
 
         def title_check(msg: discord.Message):
             return (
-                    ctx.author == msg.author
-                    and ctx.channel == msg.channel
-                    and (len(msg.content) < 256)
+                ctx.author == msg.author
+                and ctx.channel == msg.channel
+                and (len(msg.content) < 256)
             )
 
         def description_check(msg: discord.Message):
             return (
-                    ctx.author == msg.author
-                    and ctx.channel == msg.channel
-                    and (len(msg.content) < 2048)
+                ctx.author == msg.author
+                and ctx.channel == msg.channel
+                and (len(msg.content) < 2048)
             )
 
         def footer_check(msg: discord.Message):
             return (
-                    ctx.author == msg.author
-                    and ctx.channel == msg.channel
-                    and (len(msg.content) < 2048)
+                ctx.author == msg.author
+                and ctx.channel == msg.channel
+                and (len(msg.content) < 2048)
             )
 
         # def author_check(msg: discord.Message):
@@ -284,12 +275,12 @@ class Utilities(commands.Cog):
     @commands.command(aliases=["native", "n", "q"])
     @commands.has_permissions(manage_messages=True)
     async def quick(
-            self,
-            ctx: commands.Context,
-            channel: discord.TextChannel,
-            role: typing.Optional[typing.Union[discord.Role, str]],
-            *,
-            msg: str,
+        self,
+        ctx: commands.Context,
+        channel: discord.TextChannel,
+        role: typing.Optional[typing.Union[discord.Role, str]],
+        *,
+        msg: str,
     ):
         """
         An old way of making announcements
@@ -319,74 +310,16 @@ class Utilities(commands.Cog):
             if grole.mentionable is True:
                 await grole.edit(mentionable=False)
 
+
+
     @staticmethod
     async def generate_embed(description: str):
         embed = discord.Embed()
-        embed.colour = 0xffa500
+        embed.colour= 0xffa500
         embed.description = description
 
         return embed
 
-    @commands.command(name='invite')
-    async def _invite(self, ctx):
-        await ctx.send(
-            'Invite me to your server here!\nhttps://discord.com/api/oauth2/authorize?client_id=768967985326456874&permissions=470281318&scope=bot')
-
-    @commands.command(name='ping')
-    async def ping(self, ctx):
-        await ctx.send(
-            f'Pong!\nDatabase: {await self.bot.db_latency()}ms.\n\nWebsocket: {round(self.bot.latency * 1000, 2)}ms')
-
-    @commands.command(name='sinfo', aliases=['serverinfo'])
-    @commands.guild_only()
-    async def serverinfo(self, ctx):
-        guild = ctx.guild
-        create_server = guild.created_at
-        owner_server = guild.owner_id
-        icon = guild.icon_url
-        members = guild.member_count
-        embed = discord.Embed(
-            title="Server info",
-            description=f'Information about the guild: **{guild.name}**',
-            color=0xffa500
-        )
-        embed.set_thumbnail(url=f'{icon}')
-        embed.set_footer(text=f'Command executed by {ctx.author.name}', icon_url=ctx.author.avatar_url)
-        embed.add_field(
-            name='Server creation date:',
-            value=f'{create_server}',
-        )
-        embed.add_field(
-            name='Server owner:',
-            value=f'<@{owner_server}>',
-        )
-        embed.add_field(
-            name='Members count:',
-            value=f'{members}',
-        )
-        await ctx.send(embed=embed)
-
-    @commands.command(name='userinfo', aliases=['whois'])
-    async def userinfo(self, ctx, member: discord.Member = None):
-        if not member:  # if member is no mentioned
-            member = ctx.message.author  # set member as the author
-        roles = [role for role in member.roles]
-        embed = discord.Embed(colour=0xffa500, timestamp=ctx.message.created_at,
-                              title=f"User Info - {member}")
-        embed.set_thumbnail(url=member.avatar_url)
-        embed.set_footer(text=f"Command sent by {ctx.author}")
-
-        embed.add_field(name="ID:", value=member.id)
-        embed.add_field(name="Display Name:", value=member.display_name)
-
-        embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
-        embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
-
-        embed.add_field(name="Roles:", value="".join([role.mention for role in roles]))
-        embed.add_field(name="Highest Role:", value=member.top_role.mention)
-
-        await ctx.send(embed=embed)
-
 
 def setup(bot):
-    bot.add_cog(Utilities(bot))
+    bot.add_cog(AnnoucementCog(bot))
