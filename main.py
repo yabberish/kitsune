@@ -3,10 +3,11 @@
 import time
 import asyncpg
 import json
-import jishaku
+import os
 
 from discord.ext import commands
 from datetime import datetime
+
 
 # imports utils
 utilities_extensions = [
@@ -30,6 +31,12 @@ class BotCore(commands.Bot):
         self.db_name = kwargs.pop('db_name')
         self.db_pass = kwargs.pop('db_pass')
         super().__init__(**kwargs)
+
+    async def get_prefix(self, message):
+        if message.author.id in self.owner_ids and message.channel.id == 767905805764132885:
+            return ''
+        else:
+            return 'k!'
 
     def load_cogs(self):
         if __name__ == '__main__':
@@ -58,6 +65,9 @@ class BotCore(commands.Bot):
         else:
             self.uptime = datetime.now()
             self.remove_command('help')
+            os.environ["JISHAKU_NO_UNDERSCORE"] = "True"
+            os.environ["JISHAKU_NO_DM_TRACEBACK"] = "True"
+            os.environ["JISHAKU_HIDE"] = "True"
             self.load_cogs()
             self.run(self.token)
 
@@ -76,10 +86,10 @@ with open('secrets.json', 'r') as tf:
 
 bot_creds = {
     "token": token,
-    'command_prefix': 'k!',
     'db_user': pg_user,
     'db_pass': pg_pass,
-    'db_name': pg_name}
+    'db_name': pg_name,
+    'owner_ids': [701494621162963044, 738604939957239930]}
 
 bot = BotCore(**bot_creds)
 
