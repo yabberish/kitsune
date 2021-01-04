@@ -1,9 +1,10 @@
-import discord
+# -*- coding: utf-8 -*-
+
+import asyncio
 import random
+import discord
 from discord.ext import commands
 import yaml
-import asyncio
-
 
 with open('config.yaml') as config_file:
     config = yaml.load(config_file, Loader=yaml.FullLoader)
@@ -25,7 +26,7 @@ class TicTacToe:
     bottom: str = config['bottom'].lower()
     bottom_right: str = config['bottom_right'].lower()
 
-    # Generates an embed for Tic Tac Toe Game
+    # Generates A embed for Tic Tac Toe Game
     @staticmethod
     def get_ttt_embed(player1, player2, data, move_of, final=False, tie=False):
         embed = discord.Embed(title=f"Match of {player1} vs {player2}")
@@ -100,17 +101,9 @@ class TicTacToe:
         return winner
 
 
-class Fun(commands.Cog):
+class TicTacToeBot(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    @commands.command(name='8ball', aliases=['eightball'])
-    @commands.guild_only()
-    async def eight_ball(self, ctx):
-        rpsa = ["As I see it, yes.", "Ask again later.", "Better not tell you now.", "Cannot predict now.",
-                "Concentrate and ask again.", "Don't count on it.", "It is certain.", "It is decidedly so."]
-        rpsr = random.choice(rpsa)
-        await ctx.send(rpsr)
 
     @commands.command(usage='[Member]')
     async def ttt(self, ctx, member: discord.Member):
@@ -241,5 +234,6 @@ class Fun(commands.Cog):
         except discord.NotFound:
             return
 
+
 def setup(bot):
-    bot.add_cog(Fun(bot))
+    bot.add_cog(TicTacToeBot(bot))
