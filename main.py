@@ -20,12 +20,6 @@ class BotCore(commands.Bot):
         self.db_name = kwargs.pop('db_name')
         self.db_pass = kwargs.pop('db_pass')
         super().__init__(**kwargs)
-    #
-    # async def get_prefix(self, message):
-    #     if message.author.id in self.owner_ids and message.channel.id == 767905805764132885:
-    #         return ['', 'k!']
-    #     else:
-    #         return 'k!'
 
     def load_cogs(self):
         if __name__ == '__main__':

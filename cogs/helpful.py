@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import datetime
 import json
-with open('static/latest_news.json', 'r') as latest_news:
+with open('static/latest_news.txt', 'r') as latest_news:
     latest_news = json.load(latest_news)
     for message_id, channel_id in latest_news.items():
         news = {message_id: channel_id}
