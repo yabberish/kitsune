@@ -63,7 +63,7 @@ with open('secrets.json', 'r') as tf:
 
 bot_creds = {
     'token': token,
-    'command_prefix': 'k!',
+    'command_prefix': '~',
     'db_user': pg_user,
     'db_pass': pg_pass,
     'db_name': pg_name,
