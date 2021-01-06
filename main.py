@@ -60,10 +60,11 @@ with open('secrets.json', 'r') as tf:
     pg_user = tf['db_user']
     pg_pass = tf['db_pass']
     pg_name = tf['db_name']
+    prefix = tf['prefix']
 
 bot_creds = {
     'token': token,
-    'command_prefix': '~',
+    'command_prefix': prefix,
     'db_user': pg_user,
     'db_pass': pg_pass,
     'db_name': pg_name,

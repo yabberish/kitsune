@@ -7,7 +7,7 @@ import timeago
 time_format = '%Y-%m-%d %H:%M:%S.%f'
 
 
-class Moderation(commands.Cog):
+class Moderation(commands.Cog, name='Moderation'):
     def __init__(self, bot):
         self.bot = bot
 

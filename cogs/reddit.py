@@ -4,7 +4,7 @@ import aiohttp
 from discord.ext import commands
 
 
-class Reddit(commands.Cog):
+class Reddit(commands.Cog, name='Reddit'):
     def __init__(self, bot):
         self.bot = bot
 
