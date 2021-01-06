@@ -3,6 +3,7 @@ import random
 from discord.ext import commands
 import yaml
 import asyncio
+import aiohttp
 
 
 with open('config.yaml') as config_file:
@@ -240,6 +241,29 @@ class Fun(commands.Cog):
                     return
         except discord.NotFound:
             return
+
+    @commands.command(name='poke', alliases=['psearch', 'pokesearch'])
+    async def _poke(self, ctx, pokemon):
+        url_api = 'https://pokeapi.co/api/v2/pokemon/'
+        pokename = pokemon.lower()
+        try:
+            async with aiohttp.ClientSession() as cs:
+                async with cs.get(f'{url_api}{pokename}') as r:
+                    res = await r.json()
+
+            embed = discord.Embed(title="Pokemon - Information", color=0xffa500)
+            embed.add_field(name="Name", value=res['name'], inline=True)
+            embed.add_field(name="Pokedex Order", value=res['order'], inline=True)
+            embed.set_thumbnail(url=f'https://play.pokemonshowdown.com/sprites/ani/{pokename}.gif')
+            embed.add_field(name="Experience", value=res['base_experience'], inline=True)
+            embed.add_field(name="Height", value=res['height'], inline=True)
+            embed.add_field(name="Weight", value=res['weight'], inline=True)
+
+            for type in res['types']:
+                embed.add_field(name="Pokemon Type", value=type['type']['name'], inline=True)
+            await ctx.send(embed=embed)
+        except Exception:
+            await ctx.send("Pokemon not found, this could be an API issue or you didn't type a correct pokemon.")
 
 def setup(bot):
     bot.add_cog(Fun(bot))
