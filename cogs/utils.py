@@ -4,7 +4,7 @@ import typing
 import re
 
 
-class Utilities(commands.Cog):
+class Utilities(commands.Cog, name='Utilities'):
     def __init__(self, bot):
         self.bot = bot
 

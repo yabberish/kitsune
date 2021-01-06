@@ -101,7 +101,7 @@ class TicTacToe:
         return winner
 
 
-class Fun(commands.Cog):
+class Fun(commands.Cog, name='Fun'):
     def __init__(self, bot):
         self.bot = bot
 
