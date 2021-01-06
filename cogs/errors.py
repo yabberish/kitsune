@@ -2,6 +2,11 @@ import discord
 import traceback
 import sys
 from discord.ext import commands
+import logging
+
+error_messages = {
+    "":""
+}
 
 
 class ErrorHandler(commands.Cog, command_attrs=dict(hidden=True)):
@@ -11,7 +16,6 @@ class ErrorHandler(commands.Cog, command_attrs=dict(hidden=True)):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        ignored_commands = []
         if hasattr(ctx.command, 'on_error'):
             return
 
