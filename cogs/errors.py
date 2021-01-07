@@ -5,7 +5,9 @@ from discord.ext import commands
 import logging
 
 error_messages = {
-    "":""
+    "NotOwner": "Unfortunately this command is restricted to owners only. Sorry.",
+    "Forbidden": "You or the bot do not have permissions to run this command.",
+    "NotFound": "Error: 404 not found, are you sure you even exist???"
 }
 
 

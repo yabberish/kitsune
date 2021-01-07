@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import typing
 import re
+from datetime import datetime
 
 
 class Utilities(commands.Cog, name='Utilities'):
@@ -386,6 +387,23 @@ class Utilities(commands.Cog, name='Utilities'):
         embed.add_field(name="Highest Role:", value=member.top_role.mention)
 
         await ctx.send(embed=embed)
+
+    @commands.command(name='uptime', help='Check the uptime of the bot.', brief='Uptime.')
+    async def _uptime(self, ctx):
+        delta_uptime = datetime.utcnow() - self.bot.uptime
+        hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
+        minutes, seconds = divmod(remainder, 60)
+        days, hours = divmod(hours, 24)
+        await ctx.send(f"This bot has been online for {days} days, {hours} hours, {minutes} minutes and {seconds} seconds.")
+
+    @commands.group(name='dev')
+    async def _dev(self, ctx):
+        pass
+
+    @_dev.command(name='reboot')
+    async def _reboot(self, ctx):
+        await ctx.send('Rebooting.')
+        await self.bot.close()
 
 
 def setup(bot):
