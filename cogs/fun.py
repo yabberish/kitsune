@@ -1,10 +1,11 @@
 import discord
 import random
-from discord.ext import commands
 import yaml
 import asyncio
 import aiohttp
 
+from discord.ext import commands
+from utils.checks import is_voter
 
 with open('config.yaml') as config_file:
     config = yaml.load(config_file, Loader=yaml.FullLoader)
@@ -113,6 +114,7 @@ class Fun(commands.Cog, name='Fun'):
         rpsr = random.choice(rpsa)
         await ctx.send(rpsr)
 
+    @is_voter()
     @commands.command(usage='[Member]')
     async def ttt(self, ctx, member: discord.Member):
 
