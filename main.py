@@ -10,7 +10,7 @@ from datetime import datetime
 from cogs.helpful import KitsuneHelpMenu
 
 
-class BotCore(commands.Bot):
+class BotCore(commands.AutoShardedBot):
     def __init__(self, **kwargs):
         self.token = kwargs.pop('token')
         self.ignored_cogs = kwargs.pop('ignored_cogs')
@@ -40,7 +40,7 @@ class BotCore(commands.Bot):
             print('Could not connect to database.')
             print(e)
         else:
-            self.uptime = datetime.now()
+            self.uptime = datetime.utcnow()
             self.help_command = KitsuneHelpMenu()
             os.environ["JISHAKU_NO_UNDERSCORE"] = "True"
             os.environ["JISHAKU_NO_DM_TRACEBACK"] = "True"
